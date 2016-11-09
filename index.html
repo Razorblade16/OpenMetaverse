@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>The Open Metaverse</title>
+
+	<script src="aframe.min.js"></script>
+	<script src="aframe-text-component.js"></script>
+
+	<script src="raleway.js"></script>
+</head>
+<body>
+
+<a-scene>
+
+	<a-assets>
+		<a-asset-item id="deck" src="deck.dae"></a-asset-item>
+		<img id="borg" src="borg.jpg">
+		<img id="pic1" src="carmel.png">
+		<a-mixin id="font" text="font: raleway"></a-mixin>
+	</a-assets>
+	
+	<a-entity collada-model="#deck" visible="true"></a-entity>
+
+	<a-entity id="camera" position="5 -0.5 -4" rotation="0 90 0">
+		<a-animation attribute="rotation" begin="rotate" to="0 270 0" ease-in></a-animation>
+		<a-animation attribute="rotation" begin="fwd" to="0 270 0"></a-animation>
+
+		<a-camera camera="" look-controls="" wasd-controls="">
+			<a-cursor material="color: red; shader: flat"></a-cursor>
+		</a-camera>
+	</a-entity>
+
+	<!-- Title -->
+	<a-entity id="title" visible="true">
+		<a-entity mixin="font" text="text:The Open Metaverse:" position="1.2 2.5 -2" material="color:white" rotation="0 90 0"></a-entity>
+		<a-entity mixin="font" text="text:WebVR is Here" position="1.45 1.8 -1.65" material="color:white" rotation="0 90 0"></a-entity>
+
+		<a-entity mixin="font" text="text:@shaundunne;size:0.2" position="0.03 0.1 -2.85" material="color:black" rotation="0 90 0"></a-entity>
+		<a-sphere click-begin src="#borg" position="0.6 3.5 -4" rotation="0 45 0" scale="0.5 0.5 0.5" geometry="radius:0.5"></a-sphere>
+	</a-entity>
+
+
+	<!-- Slide 1 -->
+
+	<a-entity id="slide1" visible="true">
+		<a-image src="#pic1" height="4.0" radius="8" theta-length="120" position="11.98 2.14 -4.05" rotation="0 270 0" geometry="primitive:plane;height:4;width:6"></a-image>
+		<a-sphere goto-slide-2 src="#borg" position="10.45 0.6 -5.71" rotation="0 45 0" scale="0.5 0.5 0.5" geometry="radius:0.5;primitive:sphere"></a-sphere>
+	</a-entity>
+
+
+		<!-- Slide 2 -->
+
+	<a-entity id="slide2" visible="true">
+		<a-image src="#pic1" height="4.0" radius="8" theta-length="120" position="11.98 2.14 -4.05" rotation="0 270 0" geometry="primitive:plane;height:4;width:6"></a-image>
+		<a-sphere goto-slide-2 src="#borg" position="10.45 0.6 -5.71" rotation="0 45 0" scale="0.5 0.5 0.5" geometry="radius:0.5;primitive:sphere"></a-sphere>
+	</a-entity>
+
+
+
+
+
+
+</a-scene>
+
+
+
+
+
+
+<script>
+
+	var camera = document.getElementById("camera");
+	
+	AFRAME.registerComponent('click-begin', {
+		init: function(){
+			this.el.addEventListener('click', function(){
+				var title = document.getElementById("title")
+				title.setAttribute('visible', false);
+				camera.emit("rotate")
+			})
+		}
+	});
+
+	AFRAME.registerComponent('goto-slide-2', {
+
+		init: function(){
+
+		}
+
+	});
+
+	
+
+
+</script>
+	
+</body>
+</html>
